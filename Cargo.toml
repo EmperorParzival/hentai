@@ -12,8 +12,9 @@ keywords = ["hentai", "nhentai", "anime"]
 license = "MIT"
 
 [dependencies]
-reqwest = { version = "0.11.1", features = ["json"] }
 serde = { version = "1.0.123", features = ["derive"] }
+chrono = { version = "0.4.19", features = ["serde"] }
+reqwest = { version = "0.11.1", features = ["json"] }
 
 [dev-dependencies]
 rustfmt = "0.10.0"
