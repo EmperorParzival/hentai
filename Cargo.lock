@@ -272,6 +272,7 @@ dependencies = [
  "reqwest",
  "rustfmt",
  "serde",
+ "serde_json",
  "tokio",
 ]
 
