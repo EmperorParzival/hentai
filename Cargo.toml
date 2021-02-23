@@ -1,14 +1,14 @@
 [package]
 name = "hentai"
 version = "0.1.1"
-edition = "2018"
-readme = "README.md"
+description = "a WIP rust client for the nhentai api"
 authors = ["EmperorParzival <29981946+EmperorParzival@users.noreply.github.com>"]
 categories = ["api-bindings", "asynchronous", "web-programming::http-client"]
-description = "a WIP rust client for the nhentai api"
+keywords = ["hentai", "nhentai", "hmanga", "anime", "manga", "nsfw"]
 repository = "https://github.com/EmperorParzival/hentai.git"
 homepage = "https://github.com/EmperorParzival/hentai"
-keywords = ["hentai", "nhentai", "anime"]
+readme = "README.md"
+edition = "2018"
 license = "MIT"
 
 [dependencies]
