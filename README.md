@@ -1,5 +1,9 @@
 # hentai
 
-a WIP rust client for the nhentai api, based on the popular [nhentai wrapper for python](https://pypi.org/project/hentai/).
+The aptly named *hentai* crate provides an easy mechanism to consume nhentai's public facing APIs in Rust.
 
-the contents of this crate may also be considered NSFW.
+As of now, hentai relies solely on these APIs instead of scraping their website. However, this capability may be added in the near future.
+
+hentai will provide information about a doujin given its six-digit code. Alternatively, the JSON response from nhentai's `/api/gallery/{id}` endpoint may be provided directly.
+
+hentai is based on the similar [package for python](https://pypi.org/project/hentai/).
