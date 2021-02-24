@@ -1,6 +1,6 @@
 use hyper;
-use serde_json;
 use hyper::http::uri;
+use serde_json;
 use std::{fmt, io, result};
 
 #[derive(Debug)]

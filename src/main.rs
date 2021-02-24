@@ -9,8 +9,9 @@ async fn main() -> Result<()> {
     path.pop();
     path.push("sample.json");
 
-    let result = Hentai::from_json(path);
+    if let Ok(result) = Hentai::from_json(path) {
+        println!("{:?}", result);
+    }
 
-    println!("{}", result.raw.title.pretty);
     Ok(())
 }

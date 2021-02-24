@@ -1,11 +1,11 @@
-use crate::utility::error::Result;
+use crate::utility::{api::url, error::Result};
 use chrono::{serde::ts_seconds, DateTime, Utc};
 use hyper::body::{self, Buf};
 use serde::Deserialize;
 use serde_json;
 use std::{fs, path::PathBuf, str::FromStr};
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct Title {
     pub pretty: String,
     pub english: String,
@@ -42,17 +42,15 @@ pub struct Doujin {
 
 impl Doujin {
     pub async fn new(id: u32) -> Result<Self> {
-        let client = hyper::Client::new();
-        let url = format!("https://nhentai.net/api/gallery/{}", id.to_string());
-
-        let request = client.get(hyper::Uri::from_str(&url)?);
-        let response = request.await.expect("Failed to request url");
-
-        let body = body::aggregate(response)
+        let response = hyper::Client::new()
+            .get(hyper::Uri::from_str(&url::doujin(id))?)
+            .await
+            .expect("Failed to request url");
+        let content = body::aggregate(response)
             .await
             .expect("Failed to aggregate body");
         let result: Self =
-            serde_json::from_reader(body.reader()).expect("Failed to deserialize json");
+            serde_json::from_reader(content.reader()).expect("Failed to deserialize json");
 
         Ok(result)
     }
