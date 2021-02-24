@@ -7,6 +7,7 @@ categories = ["api-bindings", "asynchronous", "web-programming::http-client"]
 keywords = ["hentai", "nhentai", "hmanga", "anime", "nsfw"]
 repository = "https://github.com/EmperorParzival/hentai.git"
 homepage = "https://github.com/EmperorParzival/hentai"
+documentation = "https://docs.rs/hentai"
 readme = "README.md"
 edition = "2018"
 license = "MIT"
