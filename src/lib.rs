@@ -1,5 +1,5 @@
 mod parse;
-pub mod utility;
+pub(crate) mod utility;
 
 use chrono::{DateTime, Utc};
 use parse::{Doujin, Title};
