@@ -38,7 +38,7 @@
 //! use std::env;
 //!
 //! fn main() -> Result<()> {
-//!     let mut path = env::current_exe()?; /// path is std::path::PathBuf
+//!     let mut path = env::current_exe()?; // path is std::path::PathBuf
 //!     path.pop();
 //!     path.push("sample.json");
 //!
@@ -125,7 +125,7 @@ fn organize_fields(raw: Doujin) -> Hentai {
         upload_date: raw.upload_date,
         num_favorites: raw.num_favorites,
 
-        url: url::doujin(raw.id),
+        url: url::doujin_url(raw.id),
         cover_url: url::cover(media_id, &raw.images.cover.t),
         thumbnail_url: url::thumbnail(media_id, &raw.images.thumbnail.t),
     }
@@ -184,7 +184,7 @@ impl Hentai {
     /// use std::env;
     ///
     /// fn main() -> Result<()> {
-    ///     let mut path = env::current_exe()?; /// path is std::path::PathBuf
+    ///     let mut path = env::current_exe()?; // path is std::path::PathBuf
     ///     path.pop();
     ///     path.push("sample.json");
     ///
