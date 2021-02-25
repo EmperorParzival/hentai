@@ -7,3 +7,8 @@ As of now, hentai relies solely on these APIs instead of scraping their website.
 hentai will provide information about a doujin given its six-digit code. Alternatively, the JSON response from nhentai's `/api/gallery/{id}` endpoint may be provided directly.
 
 hentai is based on the similar [package for python](https://pypi.org/project/hentai/).
+
+## Planned Features
+[] Search doujins and other misc. features
+[] CLI
+[] Web scraping to get new & popular doujins
