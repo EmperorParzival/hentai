@@ -58,7 +58,7 @@ use parse::Doujin;
 use std::{convert::TryInto, path::PathBuf};
 use utility::api::url;
 
-pub use parse::Title;
+pub use parse::{Tag, Title};
 pub use utility::error::{HentaiError, Result};
 
 /// The main object containing the formatted information retrieved from nhentai. The raw image
@@ -79,6 +79,7 @@ pub use utility::error::{HentaiError, Result};
 pub struct Hentai {
     pub url: String,
     pub title: Title,
+    pub tags: Vec<Tag>,
     pub num_pages: u32,
     pub media_id: String,
     pub scanlator: String,
@@ -114,12 +115,14 @@ fn create_urls(raw: &Doujin) -> Vec<String> {
 
 fn organize_fields(raw: Doujin) -> Hentai {
     let media_id = &raw.media_id;
+    let new_tags = raw.tags.clone();
 
     Hentai {
         image_urls: create_urls(&raw),
         title: reconstruct_title(&raw),
         media_id: media_id.to_string(),
 
+        tags: raw.tags,
         num_pages: raw.num_pages,
         scanlator: raw.scanlator,
         upload_date: raw.upload_date,
