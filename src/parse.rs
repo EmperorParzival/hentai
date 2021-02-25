@@ -5,6 +5,9 @@ use serde::Deserialize;
 use serde_json;
 use std::{fs, path::PathBuf, str::FromStr};
 
+/// nhentai provides three different types of titles. The first one is `pretty`, which is a
+/// simple title meant to stand out. The `english` and `japanese` titles are also provided.
+/// These are more fleshed out versions of the `pretty` title.
 #[derive(Deserialize, Debug)]
 pub struct Title {
     pub pretty: String,

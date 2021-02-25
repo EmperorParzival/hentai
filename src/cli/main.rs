@@ -1,10 +1,7 @@
-use hentai::Hentai;
-use std::{env, error, result};
+use hentai::{Hentai, Result};
+use std::env;
 
-type Result<T> = result::Result<T, Box<dyn error::Error>>;
-
-#[tokio::main]
-async fn main() -> Result<()> {
+fn main() -> Result<()> {
     let mut path = env::current_exe()?;
     path.pop();
     path.push("sample.json");

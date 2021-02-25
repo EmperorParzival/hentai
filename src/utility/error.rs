@@ -3,6 +3,17 @@ use hyper::http::uri;
 use serde_json;
 use std::{fmt, io, result};
 
+/// Global error type for Hentai that catches all other types of errors that may occur.
+/// This still provides the original error message when printed.
+///
+/// The first type (`IOError`) can only occur when using the `Hentai::from_json()` constructor.
+/// Typically, the cause of this is an invalid file path being provided.
+///
+/// `HttpError` and `UriError` only occur when using `Hentai::new()`. `HttpError`s occur when
+/// [hyper](https://hyper.rs) is unable to complete the request. `UriError`s are usually caused
+/// by an invalid code being provided, thus resulting in an invalid URI.
+///
+/// `SerdeError` means that the JSON was invalid and it could not be deserialized.
 #[derive(Debug)]
 pub enum HentaiError {
     IOError(io::Error),
@@ -41,4 +52,5 @@ impl From<serde_json::Error> for HentaiError {
     }
 }
 
+/// Shorthand for Result<T, HentaiError> meant to make catching errors slightly more simple.
 pub type Result<T> = result::Result<T, HentaiError>;
