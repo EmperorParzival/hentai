@@ -31,7 +31,7 @@ pub struct Images {
 
 /// Tags are used to categorize doujins. Each doujin published on nhentai has tags indicating its
 /// content and additional data like the language and artist. For example, the tag with the
-/// category field equal to "artist" contains the name by which the they are recognized on nhentai.
+/// category field equal to "artist" contains the name by which the author is recognized on nhentai.
 #[derive(Deserialize, Debug)]
 pub struct Tag {
     pub id: u32,

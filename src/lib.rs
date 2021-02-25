@@ -24,8 +24,8 @@
 //!
 //! #[tokio::main]
 //! async fn main() -> Result<()> {
-//!     if let Ok(result) = Hentai::new(165961) {
-//!         println!("{:?}", result);
+//!     if let Ok(result) = Hentai::new(165961).await? {
+//!         println!("{:?}", result); // makes use of the Debug trait on Hentai
 //!     }
 //!
 //!     Ok(())
@@ -38,7 +38,7 @@
 //! use std::env;
 //!
 //! fn main() -> Result<()> {
-//!     let mut path = env::current_exe()?; // path is std::path::PathBuf
+//!     let mut path = env::current_exe()?; // std::path::PathBuf
 //!     path.pop();
 //!     path.push("sample.json");
 //!
@@ -90,39 +90,24 @@ pub struct Hentai {
     pub upload_date: DateTime<Utc>,
 }
 
-fn reconstruct_title(raw: &Doujin) -> Title {
-    match &raw.title {
-        Title {
-            pretty,
-            english,
-            japanese,
-        } => Title {
-            pretty: pretty.clone(),
-            english: english.clone(),
-            japanese: japanese.clone(),
-        },
-    }
-}
-
 fn create_urls(raw: &Doujin) -> Vec<String> {
     raw.images
         .pages
         .iter()
         .enumerate()
         .map(|(i, v)| url::page(&raw.media_id, i.try_into().unwrap(), &v.t))
-        .collect::<Vec<String>>()
+        .collect()
 }
 
 fn organize_fields(raw: Doujin) -> Hentai {
     let media_id = &raw.media_id;
-    let new_tags = raw.tags.clone();
 
     Hentai {
         image_urls: create_urls(&raw),
-        title: reconstruct_title(&raw),
         media_id: media_id.to_string(),
 
         tags: raw.tags,
+        title: raw.title,
         num_pages: raw.num_pages,
         scanlator: raw.scanlator,
         upload_date: raw.upload_date,
@@ -159,8 +144,8 @@ impl Hentai {
     ///
     /// #[tokio::main]
     /// async fn main() -> Result<()> {
-    ///     if let Ok(result) = Hentai::new(165961) {
-    ///         println!("{:?}", result);
+    ///     if let Ok(result) = Hentai::new(165961).await? {
+    ///         println!("{:?}", result); // makes use of the Debug trait on Hentai
     ///     }
     ///
     ///     Ok(())
@@ -187,7 +172,7 @@ impl Hentai {
     /// use std::env;
     ///
     /// fn main() -> Result<()> {
-    ///     let mut path = env::current_exe()?; // path is std::path::PathBuf
+    ///     let mut path = env::current_exe()?; // std::path::PathBuf
     ///     path.pop();
     ///     path.push("sample.json");
     ///
