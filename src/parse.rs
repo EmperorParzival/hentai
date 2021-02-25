@@ -29,6 +29,19 @@ pub struct Images {
     pub thumbnail: Image,
 }
 
+/// Tags are used to categorize doujins. Each doujin published on nhentai has tags indicating its
+/// content and additional data like the language and artist. For example, the tag with the
+/// category field equal to "artist" contains the name by which the they are recognized on nhentai.
+#[derive(Deserialize, Debug)]
+pub struct Tag {
+    pub id: u32,
+    pub count: u32,
+    pub url: String,
+    pub name: String,
+    #[serde(rename = "type")]
+    pub category: String,
+}
+
 #[derive(Deserialize)]
 pub struct Doujin {
     pub id: u32,
@@ -64,14 +77,4 @@ impl Doujin {
 
         Ok(result)
     }
-}
-
-// "r#" causes syntax highlighting issues in Atom
-#[derive(Deserialize)]
-pub struct Tag {
-    pub id: u32,
-    pub count: u32,
-    pub url: String,
-    pub name: String,
-    pub r#type: String,
 }
