@@ -1,4 +1,4 @@
-use hentai::{Hentai, Result};
+use hentai::{Hentai, Result, Website};
 use std::env;
 
 fn main() -> Result<()> {
@@ -6,7 +6,7 @@ fn main() -> Result<()> {
     path.pop();
     path.push("sample.json");
 
-    if let Ok(result) = Hentai::from_json(path) {
+    if let Ok(result) = Hentai::from_json(path, Website::XXX) {
         println!("{:?}", result);
     }
 

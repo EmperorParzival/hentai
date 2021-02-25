@@ -56,10 +56,13 @@ pub(crate) mod utility;
 use chrono::{DateTime, Utc};
 use parse::Doujin;
 use std::{convert::TryInto, path::PathBuf};
-use utility::api::url;
+use utility::api::url::Make;
 
 pub use parse::{Tag, Title};
-pub use utility::error::{HentaiError, Result};
+pub use utility::{
+    api::url::Website,
+    error::{HentaiError, Result},
+};
 
 /// The main object containing the formatted information retrieved from nhentai. The raw image
 /// data is converted to into image URLs. A brief explanation of each field is located below.
@@ -90,20 +93,20 @@ pub struct Hentai {
     pub upload_date: DateTime<Utc>,
 }
 
-fn create_urls(raw: &Doujin) -> Vec<String> {
+fn create_urls(raw: &Doujin, builder: &Make) -> Vec<String> {
     raw.images
         .pages
         .iter()
         .enumerate()
-        .map(|(i, v)| url::page(&raw.media_id, i.try_into().unwrap(), &v.t))
+        .map(|(i, v)| builder.page(&raw.media_id, i.try_into().unwrap(), &v.t))
         .collect()
 }
 
-fn organize_fields(raw: Doujin) -> Hentai {
+fn organize_fields(raw: Doujin, builder: Make) -> Hentai {
     let media_id = &raw.media_id;
 
     Hentai {
-        image_urls: create_urls(&raw),
+        image_urls: create_urls(&raw, &builder),
         media_id: media_id.to_string(),
 
         tags: raw.tags,
@@ -113,9 +116,9 @@ fn organize_fields(raw: Doujin) -> Hentai {
         upload_date: raw.upload_date,
         num_favorites: raw.num_favorites,
 
-        url: url::doujin_url(raw.id),
-        cover_url: url::cover(media_id, &raw.images.cover.t),
-        thumbnail_url: url::thumbnail(media_id, &raw.images.thumbnail.t),
+        url: builder.doujin_url(raw.id),
+        cover_url: builder.cover(media_id, &raw.images.cover.t),
+        thumbnail_url: builder.cover_thumbnail(media_id, &raw.images.thumbnail.t),
     }
 }
 
@@ -151,10 +154,10 @@ impl Hentai {
     ///     Ok(())
     /// }
     /// ```
-    pub async fn new(code: u32) -> Result<Self> {
+    pub async fn new(code: u32, mode: Website) -> Result<Self> {
         let result = Doujin::new(code).await?;
 
-        Ok(organize_fields(result))
+        Ok(organize_fields(result, Make::new(mode)))
     }
 
     /// Generates a new `Hentai` object from the doujin JSON located at the provided file path.
@@ -183,9 +186,9 @@ impl Hentai {
     ///     Ok(())
     /// }
     /// ```
-    pub fn from_json(path: PathBuf) -> Result<Self> {
+    pub fn from_json(path: PathBuf, mode: Website) -> Result<Self> {
         let result = Doujin::from_json(path)?;
 
-        Ok(organize_fields(result))
+        Ok(organize_fields(result, Make::new(mode)))
     }
 }
