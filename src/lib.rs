@@ -13,18 +13,18 @@
 //! hentai is based on the similar [package for python](https://pypi.org/project/hentai/).
 //!
 //! # Code samples
-//! *more info provided in the documentation for `Hentai`*
+//! *more info for these samples is provided in the documentation for `Hentai`*
 //!
 //! #### Hentai::new()
 //! ```rust
-//! use hentai::Hentai;
+//! use hentai::{Hentai, Website};
 //! use std::{error, result};
 //!
 //! type Result<T> = result::Result<T, Box<dyn error::Error>>;
 //!
 //! #[tokio::main]
 //! async fn main() -> Result<()> {
-//!     if let Ok(result) = Hentai::new(165961).await? {
+//!     if let Ok(result) = Hentai::new(165961, Website::NET).await? {
 //!         println!("{:?}", result); // makes use of the Debug trait on Hentai
 //!     }
 //!
@@ -34,7 +34,7 @@
 //!
 //! #### Hentai::from_json()
 //! ```rust
-//! use hentai::{Hentai, Result};
+//! use hentai::{Hentai, Result, Website};
 //! use std::env;
 //!
 //! fn main() -> Result<()> {
@@ -42,7 +42,7 @@
 //!     path.pop();
 //!     path.push("sample.json");
 //!
-//!     if let Ok(result) = Hentai::from_json(path) {
+//!     if let Ok(result) = Hentai::from_json(path, Website::XXX) {
 //!         println!("{:?}", result); // makes use of the Debug trait on Hentai
 //!     }
 //!
@@ -72,9 +72,10 @@ pub use utility::{
 /// - Fields suffixed with "url" or "urls" are links to the doujin's image files.
 /// - Fields starting with "num" are statistics provided by nhentai. These may not be accurate
 /// for newly uploaded doujins.
+/// - `title` contains the three different titles for the doujin provided by nhentai.
+/// - Likewise, `tags` contains all the tags for the doujin.
 /// - `media_id` is the separate code that nhentai uses to denote where the image files for
 /// doujins are from. You will see this in the image urls (it is unrelated to the six-digit codes).
-/// - `title` contains the three different titles for the doujin provided by nhentai.
 /// - `upload_date` is a
 /// [chrono::DateTime](https://docs.rs/chrono/0.4.19/chrono/struct.DateTime.html) object that
 /// indicates when the doujin was uploaded to nhentai. This is not the creation date of the doujin.
@@ -138,16 +139,17 @@ impl Hentai {
     /// response may be invalid
     /// ([serde_json::Error](https://docs.serde.rs/serde_json/struct.Error.html)).
     ///
-    /// The sample below depends on [tokio](https://tokio.rs/).
+    /// More information about the `Website` enum can be found in its section. The sample below
+    /// depends on [tokio](https://tokio.rs/).
     /// ```rust
-    /// use hentai::Hentai;
+    /// use hentai::{Hentai, Website};
     /// use std::{error, result};
     ///
     /// type Result<T> = result::Result<T, Box<dyn error::Error>>;
     ///
     /// #[tokio::main]
     /// async fn main() -> Result<()> {
-    ///     if let Ok(result) = Hentai::new(165961).await? {
+    ///     if let Ok(result) = Hentai::new(165961, Website::NET).await? {
     ///         println!("{:?}", result); // makes use of the Debug trait on Hentai
     ///     }
     ///
@@ -171,7 +173,7 @@ impl Hentai {
     /// [sample.json](https://github.com/EmperorParzival/hentai/blob/main/src/cli/sample.json) in
     /// the same directory as the executable.
     /// ```rust
-    /// use hentai::{Hentai, Result};
+    /// use hentai::{Hentai, Result, Website};
     /// use std::env;
     ///
     /// fn main() -> Result<()> {
@@ -179,7 +181,7 @@ impl Hentai {
     ///     path.pop();
     ///     path.push("sample.json");
     ///
-    ///     if let Ok(result) = Hentai::from_json(path) {
+    ///     if let Ok(result) = Hentai::from_json(path, Website::XXX) {
     ///         println!("{:?}", result); // makes use of the Debug trait on Hentai
     ///     }
     ///

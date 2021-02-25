@@ -15,6 +15,18 @@ pub fn doujin(id: u32) -> String {
     format!("https://{}/api/gallery/{}", NET, id.to_string())
 }
 
+/// In cases where the standard output domain [nhentai.net](https://nhentai.net) may be restricted
+/// on the end user's network, an option can be provided to use [nhentai.xxx](https://nhentai.xxx)
+/// URLs instead. Note that the `Hentai::new()` constructor will not work if the standard output
+/// domain is blocked. This is because [nhentai.xxx](https://nhentai.xxx) does not reimplement
+/// nhentai's API and requests must still be made to the original URL.
+///
+/// However, if the JSON is provided, one may generate either type of URL regardless of whether or
+/// not the original domain is blocked. This feature's primary purpose is to retrieve information
+/// for the doujin under an unrestricted network, and create alternative URLs for the user with the
+/// restricted network.
+///
+/// One of these options must be provided in the constructor.
 #[derive(Debug)]
 pub enum Website {
     NET,
