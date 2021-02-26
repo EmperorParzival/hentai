@@ -1,6 +1,6 @@
 [package]
 name = "hentai"
-version = "0.2.0"
+version = "0.2.1"
 description = "API wrapper for nhentai.net"
 authors = ["EmperorParzival <29981946+EmperorParzival@users.noreply.github.com>"]
 categories = ["api-bindings", "asynchronous", "web-programming::http-client"]
@@ -13,12 +13,12 @@ edition = "2018"
 license = "MIT"
 
 [dependencies]
+hyper-tls = "0.5.0"
 serde_json = "1.0.62"
 serde = { version = "1.0.123", features = ["derive"] }
 chrono = { version = "0.4.19", features = ["serde"] }
 hyper = { version = "0.14.4", features = ["full"] }
 tokio = { version = "1.2.0", features = ["macros", "rt-multi-thread"], optional = true }
-hyper-tls = "0.5.0"
 
 [dev-dependencies]
 rustfmt = "0.10.0"
