@@ -1,14 +1,9 @@
 use hentai::{Hentai, Result, Website};
-use std::env;
 
-fn main() -> Result<()> {
-    let mut path = env::current_exe()?;
-    path.pop();
-    path.push("sample.json");
-
-    if let Ok(result) = Hentai::from_json(path, Website::XXX) {
-        println!("{:?}", result);
-    }
-
+#[tokio::main]
+async fn main() -> Result<()> {
+    let response = Hentai::new(165961, Website::NET).await?; 
+    println!("{:?}", response); // makes use of the Debug trait on Hentai
+    
     Ok(())
 }
