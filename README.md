@@ -39,11 +39,6 @@ provided directly.
 hentai is based on the similar
 [package for python](https://pypi.org/project/hentai/).
 
-## Planned Features
-- [ ] Search doujins and other misc. features
-- [ ] CLI
-- [ ] Web scraping to get new & popular doujins
-
 ## Install
 
 ### Using [cargo-edit](https://crates.io/crates/cargo-edit)
@@ -57,12 +52,12 @@ Add the following to your `Cargo.toml`:
 hentai = "0.2.1"
 ```
 
+## Planned Features
+- [ ] Search doujins and other misc. features
+- [ ] CLI
+- [ ] Web scraping to get new & popular doujins
+
 ## Contribute
-
-### Browser
-[![Run on Repl.it](https://repl.it/badge/github/EmperorParzival/hentai)](https://repl.it/github/EmperorParzival/hentai)
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/EmperorParzival/hentai)
 
 ### Local
 ```shell
@@ -70,3 +65,8 @@ git clone https://github.com/EmperorParzival/hentai
 cd hentai
 cargo install --force --path .
 ```
+
+### Browser
+- [Run on Repl.it](https://repl.it/github/EmperorParzival/hentai)
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/EmperorParzival/hentai)
