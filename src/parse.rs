@@ -1,6 +1,7 @@
 use crate::utility::{api::url, error::Result};
 use chrono::{serde::ts_seconds, DateTime, Utc};
 use hyper::body::{self, Buf};
+use hyper_tls::HttpsConnector;
 use serde::Deserialize;
 use serde_json;
 use std::{fs, path::PathBuf, str::FromStr};
@@ -58,7 +59,10 @@ pub struct Doujin {
 
 impl Doujin {
     pub async fn new(id: u32) -> Result<Self> {
-        let response = hyper::Client::new()
+        let https = HttpsConnector::new();
+        let client = hyper::Client::builder().build::<_, hyper::Body>(https);
+
+        let response = client
             .get(hyper::Uri::from_str(&url::doujin(id))?)
             .await
             .expect("Failed to request url");
