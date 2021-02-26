@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/EmperorParzival/hentai)
+
 # hentai
 
 The aptly named *hentai* crate provides an easy mechanism to consume nhentai's
