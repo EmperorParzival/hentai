@@ -17,17 +17,13 @@
 //!
 //! #### Hentai::new()
 //! ```rust
-//! use hentai::{Hentai, Website};
-//! use std::{error, result};
-//!
-//! type Result<T> = result::Result<T, Box<dyn error::Error>>;
-//!
+//! use hentai::{Hentai, Result, Website};
+//! 
 //! #[tokio::main]
 //! async fn main() -> Result<()> {
-//!     if let Ok(result) = Hentai::new(165961, Website::NET).await? {
-//!         println!("{:?}", result); // makes use of the Debug trait on Hentai
-//!     }
-//!
+//!     let response = Hentai::new(165961, Website::NET).await?; 
+//!     println!("{:?}", response); // makes use of the Debug trait on Hentai
+//!    
 //!     Ok(())
 //! }
 //! ```
@@ -142,17 +138,13 @@ impl Hentai {
     /// More information about the `Website` enum can be found in its section. The sample below
     /// depends on [tokio](https://tokio.rs/).
     /// ```rust
-    /// use hentai::{Hentai, Website};
-    /// use std::{error, result};
-    ///
-    /// type Result<T> = result::Result<T, Box<dyn error::Error>>;
-    ///
+    /// use hentai::{Hentai, Result, Website};
+    /// 
     /// #[tokio::main]
     /// async fn main() -> Result<()> {
-    ///     if let Ok(result) = Hentai::new(165961, Website::NET).await? {
-    ///         println!("{:?}", result); // makes use of the Debug trait on Hentai
-    ///     }
-    ///
+    ///     let response = Hentai::new(165961, Website::NET).await?; 
+    ///     println!("{:?}", response); // makes use of the Debug trait on Hentai
+    ///    
     ///     Ok(())
     /// }
     /// ```
