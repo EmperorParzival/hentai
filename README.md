@@ -1,12 +1,9 @@
 <p align="center">
   <a href="https://crates.io/crates/hentai">
-    <img alt="version" src="https://docs.rs/hentai/badge.svg"></img>
+    <img alt="version" src="https://img.shields.io/crates/v/hentai.svg"></img>
   </a>
-  <a href="https://github.com/EmperorParzival/hentai/blob/main/LICENSE">
-    <img alt="license" src="https://img.shields.io/crates/l/hentai"></img>
-  </a>
-  <a href="https://github.com/EmperorParzival/hentai">
-    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/EmperorParzival/hentai"></img>
+  <a href="https://docs.rs/base64">
+    <img alt="documentation" src="https://docs.rs/base64/badge.svg"></img>
   </a>
   <a href="https://crates.io/crates/hentai">
     <img alt="downloads" src="https://img.shields.io/crates/d/hentai"></img>
@@ -17,6 +14,13 @@
   </a>
   <a href="https://gitpod.io/#https://github.com/EmperorParzival/hentai">
     <img alt="Gitpod ready-to-code" src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod"></img>
+  </a>
+  <br />
+  <a href="https://github.com/EmperorParzival/hentai/blob/main/LICENSE">
+    <img alt="license" src="https://img.shields.io/crates/l/hentai"></img>
+  </a>
+  <a href="https://github.com/EmperorParzival/hentai">
+    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/EmperorParzival/hentai"></img>
   </a>
 </p>
 
