@@ -2,8 +2,8 @@
   <a href="https://crates.io/crates/hentai">
     <img alt="version" src="https://img.shields.io/crates/v/hentai.svg"></img>
   </a>
-  <a href="https://docs.rs/base64">
-    <img alt="documentation" src="https://docs.rs/base64/badge.svg"></img>
+  <a href="https://docs.rs/hentai">
+    <img alt="documentation" src="https://docs.rs/hentai/badge.svg"></img>
   </a>
   <a href="https://crates.io/crates/hentai">
     <img alt="downloads" src="https://img.shields.io/crates/d/hentai"></img>
