@@ -102,6 +102,7 @@ impl Make {
         }
     }
 
+    #[allow(dead_code)]
     pub fn page_thumbnail(&self, media_id: &String, number: u32, file_type: &String) -> String {
         match self.mode {
             Website::NET => format!(

@@ -18,6 +18,7 @@ serde = { version = "1.0.123", features = ["derive"] }
 chrono = { version = "0.4.19", features = ["serde"] }
 hyper = { version = "0.14.4", features = ["full"] }
 tokio = { version = "1.2.0", features = ["macros", "rt-multi-thread"], optional = true }
+hyper-tls = "0.5.0"
 
 [dev-dependencies]
 rustfmt = "0.10.0"
