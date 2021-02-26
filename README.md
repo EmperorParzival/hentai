@@ -44,7 +44,25 @@ hentai is based on the similar
 - [ ] CLI
 - [ ] Web scraping to get new & popular doujins
 
+## Install
+
+### Using [cargo-edit](https://crates.io/crates/cargo-edit)
+```shell
+cargo add hentai
+```
+
+### Manually
+Add the following to your `Cargo.toml`:
+```toml
+hentai = "0.2.1"
+```
+
 ## Contribute
+
+### Browser
+[![Run on Repl.it](https://repl.it/badge/github/EmperorParzival/hentai)](https://repl.it/github/EmperorParzival/hentai)
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/EmperorParzival/hentai)
 
 ### Local
 ```shell
@@ -52,8 +70,3 @@ git clone https://github.com/EmperorParzival/hentai
 cd hentai
 cargo install --force --path .
 ```
-
-### Browser
-[![Run on Repl.it](https://repl.it/badge/github/EmperorParzival/hentai)](https://repl.it/github/EmperorParzival/hentai)
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/EmperorParzival/hentai)
