@@ -28,6 +28,7 @@ pub fn doujin(id: u32) -> String {
 ///
 /// One of these options must be provided in the constructor.
 #[derive(Debug)]
+#[allow(clippy::upper_case_acronyms)]
 pub enum Website {
     NET,
     XXX,
@@ -49,7 +50,7 @@ impl Make {
         }
     }
 
-    pub fn cover(&self, media_id: &String, file_type: &String) -> String {
+    pub fn cover(&self, media_id: &str, file_type: &str) -> String {
         match self.mode {
             Website::NET => format!(
                 "https://t.{}/galleries/{}/cover.{}",
@@ -66,7 +67,7 @@ impl Make {
         }
     }
 
-    pub fn cover_thumbnail(&self, media_id: &String, file_type: &String) -> String {
+    pub fn cover_thumbnail(&self, media_id: &str, file_type: &str) -> String {
         match self.mode {
             Website::NET => format!(
                 "https://t.{}/galleries/{}/thumb.{}",
@@ -83,7 +84,7 @@ impl Make {
         }
     }
 
-    pub fn page(&self, media_id: &String, number: u32, file_type: &String) -> String {
+    pub fn page(&self, media_id: &str, number: u32, file_type: &str) -> String {
         match self.mode {
             Website::NET => format!(
                 "https://i.{}/galleries/{}/{}.{}",
@@ -103,7 +104,7 @@ impl Make {
     }
 
     #[allow(dead_code)]
-    pub fn page_thumbnail(&self, media_id: &String, number: u32, file_type: &String) -> String {
+    pub fn page_thumbnail(&self, media_id: &str, number: u32, file_type: &str) -> String {
         match self.mode {
             Website::NET => format!(
                 "https://t.{}/galleries/{}/{}t.{}",
