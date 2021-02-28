@@ -11,10 +11,6 @@ fn get_type(file_type: &str) -> &str {
     }
 }
 
-pub fn doujin(id: u32) -> String {
-    format!("https://{}/api/gallery/{}", NET, id.to_string())
-}
-
 /// In cases where the standard output domain [nhentai.net](https://nhentai.net) may be restricted
 /// on the end user's network, an option can be provided to use [nhentai.xxx](https://nhentai.xxx)
 /// URLs instead. Note that the `Hentai::new()` constructor will not work if the standard output
@@ -122,4 +118,15 @@ impl Make {
             ),
         }
     }
+}
+
+pub fn doujin(id: u32) -> String {
+    format!("https://{}/api/gallery/{}", NET, id.to_string())
+}
+
+pub fn random(mode: &Website) -> String {
+    format!("https://{}/random", match mode {
+        Website::NET => NET,
+        Website::XXX => XXX,
+    })
 }
