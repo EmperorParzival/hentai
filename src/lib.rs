@@ -96,7 +96,7 @@ fn create_urls(raw: &Doujin, builder: &Make) -> Vec<String> {
 }
 
 fn organize_fields(raw: Doujin, builder: Make) -> Hentai {
-    let ref media_id = raw.media_id;
+    let media_id = &raw.media_id;
 
     Hentai {
         image_urls: create_urls(&raw, &builder),
@@ -146,6 +146,12 @@ impl Hentai {
     /// ```
     pub async fn new(code: u32, mode: Website) -> Result<Self> {
         let result = Doujin::new(code).await?;
+
+        Ok(organize_fields(result, Make::new(mode)))
+    }
+
+    pub async fn random(mode: Website) -> Result<Self> {
+        let result = Doujin::random(&mode).await?;
 
         Ok(organize_fields(result, Make::new(mode)))
     }
