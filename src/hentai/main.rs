@@ -38,7 +38,7 @@ async fn main() -> Result<()> {
         if let Some(code) = matches.value_of("code") {
             Hentai::new(code.parse::<u32>().unwrap(), domain).await?
         } else {
-            Hentai::random(165961, domain).await?
+            Hentai::random(domain).await?
         };
     };
 
