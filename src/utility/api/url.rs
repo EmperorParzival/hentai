@@ -125,8 +125,11 @@ pub fn doujin(id: u32) -> String {
 }
 
 pub fn random(mode: &Website) -> String {
-    format!("https://{}/random", match mode {
-        Website::NET => NET,
-        Website::XXX => XXX,
-    })
+    format!(
+        "https://{}/random",
+        match mode {
+            Website::NET => NET,
+            Website::XXX => XXX,
+        }
+    )
 }
