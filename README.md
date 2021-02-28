@@ -51,7 +51,7 @@ hentai = "0.2.2"
 
 ## Planned Features
 - [ ] Search doujins and other misc. features
-- [ ] CLI
+- [ ] CLI [in progress]
 - [ ] Web scraping to get new & popular doujins
 
 ## Contribute
