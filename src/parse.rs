@@ -1,9 +1,14 @@
-use crate::utility::{api::url, error::Result};
+use crate::utility::{
+    api::url::{self, Website},
+    error::Result,
+};
 use chrono::{serde::ts_seconds, DateTime, Utc};
-use hyper::body::{self, Buf};
+use hyper::{
+    body::{self, Buf},
+    Client,
+};
 use hyper_tls::HttpsConnector;
 use serde::Deserialize;
-use serde_json;
 use std::{fs, path::PathBuf, str::FromStr};
 
 /// nhentai provides three different types of titles. The first one is `pretty`, which is a
@@ -60,10 +65,27 @@ pub struct Doujin {
 impl Doujin {
     pub async fn new(id: u32) -> Result<Self> {
         let https = HttpsConnector::new();
-        let client = hyper::Client::builder().build::<_, hyper::Body>(https);
+        let client = Client::builder().build::<_, hyper::Body>(https);
 
         let response = client
             .get(hyper::Uri::from_str(&url::doujin(id))?)
+            .await
+            .expect("Failed to request url");
+        let content = body::aggregate(response)
+            .await
+            .expect("Failed to aggregate body");
+        let result: Self =
+            serde_json::from_reader(content.reader()).expect("Failed to deserialize json");
+
+        Ok(result)
+    }
+
+    pub async fn random(mode: &Website) -> Result<Self> {
+        let https = HttpsConnector::new();
+        let client = Client::builder().build::<_, hyper::Body>(https);
+
+        let response = client
+            .get(hyper::Uri::from_str(&url::random(mode))?)
             .await
             .expect("Failed to request url");
         let content = body::aggregate(response)
