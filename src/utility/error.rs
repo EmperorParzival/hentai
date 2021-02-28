@@ -1,6 +1,4 @@
-use hyper;
 use hyper::http::uri;
-use serde_json;
 use std::{fmt, io, result};
 
 /// Global error type for Hentai that catches all other types of errors that may occur.
@@ -16,7 +14,7 @@ use std::{fmt, io, result};
 /// `SerdeError` means that the JSON was invalid and it could not be deserialized.
 #[derive(Debug)]
 pub enum HentaiError {
-    IOError(io::Error),
+    IoError(io::Error),
     HttpError(hyper::Error),
     UriError(uri::InvalidUri),
     SerdeError(serde_json::Error),
@@ -30,7 +28,7 @@ impl fmt::Display for HentaiError {
 
 impl From<io::Error> for HentaiError {
     fn from(err: io::Error) -> Self {
-        HentaiError::IOError(err)
+        HentaiError::IoError(err)
     }
 }
 
