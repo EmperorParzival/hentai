@@ -151,7 +151,8 @@ impl Hentai {
     }
 
     pub async fn random(mode: Website) -> Result<Self> {
-        let result = Doujin::random(&mode).await?;
+        let code = Doujin::random(&mode).await?;
+        let result = Doujin::new(code).await?;
 
         Ok(organize_fields(result, Make::new(mode)))
     }
