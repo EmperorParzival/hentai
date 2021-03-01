@@ -17,7 +17,7 @@ hyper-tls = "0.5.0"
 serde_json = "1.0.62"
 chrono = { version = "0.4.19", features = ["serde"] }
 serde = { version = "1.0.123", features = ["derive"] }
-hyper = { version = "0.14.4", features = ["client", "runtime", "http2"] }
+hyper = { version = "0.14.4", features = ["client", "runtime", "http1"] }
 
 clap = { version = "2.33.3", optional = true }
 tokio = { version = "1.2.0", features = ["macros", "rt-multi-thread"], optional = true }
