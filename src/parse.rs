@@ -80,7 +80,7 @@ impl Doujin {
         Ok(result)
     }
 
-    pub async fn random(mode: &Website) -> Result<Self> {
+    pub async fn random(mode: &Website) -> Result<u32> {
         let https = HttpsConnector::new();
         let client = Client::builder().build::<_, hyper::Body>(https);
 
@@ -88,13 +88,21 @@ impl Doujin {
             .get(hyper::Uri::from_str(&url::random(mode))?)
             .await
             .expect("Failed to request url");
-        let content = body::aggregate(response)
-            .await
-            .expect("Failed to aggregate body");
-        let result: Self =
-            serde_json::from_reader(content.reader()).expect("Failed to deserialize json");
+        let segments = response
+            .headers()
+            .get(hyper::header::LOCATION)
+            .ok_or("Failed to retrieve url")?
+            .to_str()?
+            .split('/')
+            .collect::<Vec<_>>();
+        let code = segments
+            .iter()
+            .next_back()
+            .ok_or("Failed to parse url")?
+            .parse::<u32>()
+            .unwrap();
 
-        Ok(result)
+        Ok(code)
     }
 
     pub fn from_json(path: PathBuf) -> Result<Self> {

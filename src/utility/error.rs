@@ -1,4 +1,4 @@
-use hyper::http::uri;
+use hyper::{header, http::uri};
 use std::{fmt, io, result};
 
 /// Global error type for Hentai that catches all other types of errors that may occur.
@@ -7,17 +7,26 @@ use std::{fmt, io, result};
 /// The first type (`IOError`) can only occur when using the `Hentai::from_json()` constructor.
 /// Typically, the cause of this is an invalid file path being provided.
 ///
+/// `BaseError` is a standard error used to indicate that an Option<> failed to be converted into
+/// a Result<>. This occurs in the `Hentai::random()` constructor after the request is sent but
+/// the redirect header cannot be converted into a string.
+///
 /// `HttpError` and `UriError` only occur when using `Hentai::new()`. `HttpError`s occur when
 /// [hyper](https://hyper.rs) is unable to complete the request. `UriError`s are usually caused
 /// by an invalid code being provided, thus resulting in an invalid URI.
 ///
 /// `SerdeError` means that the JSON was invalid and it could not be deserialized.
+///
+/// `ToStrError` happens when using `Hentai::random()` and the redirect header cannot be converted
+/// into a random doujin URL.
 #[derive(Debug)]
 pub enum HentaiError {
     IoError(io::Error),
+    BaseError(&'static str),
     HttpError(hyper::Error),
     UriError(uri::InvalidUri),
     SerdeError(serde_json::Error),
+    ToStrError(header::ToStrError),
 }
 
 impl fmt::Display for HentaiError {
@@ -29,6 +38,12 @@ impl fmt::Display for HentaiError {
 impl From<io::Error> for HentaiError {
     fn from(err: io::Error) -> Self {
         HentaiError::IoError(err)
+    }
+}
+
+impl From<&'static str> for HentaiError {
+    fn from(err: &'static str) -> Self {
+        HentaiError::BaseError(err)
     }
 }
 
@@ -47,6 +62,12 @@ impl From<uri::InvalidUri> for HentaiError {
 impl From<serde_json::Error> for HentaiError {
     fn from(err: serde_json::Error) -> Self {
         HentaiError::SerdeError(err)
+    }
+}
+
+impl From<header::ToStrError> for HentaiError {
+    fn from(err: header::ToStrError) -> Self {
+        HentaiError::ToStrError(err)
     }
 }
 
