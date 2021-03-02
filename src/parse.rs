@@ -11,11 +11,13 @@ use std::{fs, path::PathBuf, str::FromStr};
 /// nhentai provides three different types of titles. The first one is `pretty`, which is a
 /// simple title meant to stand out. The `english` and `japanese` titles are also provided.
 /// These are more fleshed out versions of the `pretty` title.
+/// 
+/// None of these fields are guaranteed to be provided. They will always be `Option<String>`s.
 #[derive(Deserialize, Debug)]
 pub struct Title {
-    pub pretty: String,
-    pub english: String,
-    pub japanese: String,
+    pub pretty: Option<String>,
+    pub english: Option<String>,
+    pub japanese: Option<String>,
 }
 
 #[derive(Deserialize)]

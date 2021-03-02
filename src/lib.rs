@@ -42,10 +42,13 @@
 //! use std::env;
 //!
 //! fn main() -> Result<()> {
-//!     let path = env::current_dir()?;
+//!     let mut path = env::current_dir()?;
+//!     path.pop();
+//!     path.push("sample.json");
+//! 
 //!     let response = Hentai::from_json(path, Website::XXX)?;
-//!
 //!     println!("{:?}", result);
+//! 
 //!     Ok(())
 //! }
 //! ```
@@ -202,9 +205,11 @@ impl Hentai {
     /// use std::env;
     ///
     /// fn main() -> Result<()> {
-    ///     let path = env::current_dir()?;
+    ///     let mut path = env::current_exe()?;
+    ///     path.pop();
+    ///     path.push("sample.json");
+    /// 
     ///     let response = Hentai::from_json(path, Website::XXX)?;
-    ///
     ///     println!("{:?}", result);
     ///     Ok(())
     /// }
