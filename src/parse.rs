@@ -12,7 +12,9 @@ use std::{fs, path::PathBuf, str::FromStr};
 /// simple title meant to stand out. The `english` and `japanese` titles are also provided.
 /// These are more fleshed out versions of the `pretty` title.
 /// 
-/// None of these fields are guaranteed to be provided. They will always be `Option<String>`s.
+/// None of these fields are guaranteed to be provided. They might be set to an empty `String`, in
+/// which case they will be set to `Some("")`. In other cases, the field may not be specified at
+/// all, in which case they will be set to `None`.
 #[derive(Deserialize, Debug)]
 pub struct Title {
     pub pretty: Option<String>,
