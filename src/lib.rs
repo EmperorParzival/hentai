@@ -45,23 +45,23 @@
 //!     let mut path = env::current_dir()?;
 //!     path.pop();
 //!     path.push("sample.json");
-//! 
+//!
 //!     let response = Hentai::from_json(path, Website::XXX)?;
 //!     println!("{:?}", result);
-//! 
+//!
 //!     Ok(())
 //! }
 //! ```
 
-mod parse;
+mod doujin;
 pub(crate) mod utility;
 
 use chrono::{DateTime, Utc};
-use parse::Doujin;
+use doujin::Doujin;
 use std::{convert::TryInto, path::PathBuf};
 use utility::api::url::Make;
 
-pub use parse::{Tag, Title};
+pub use doujin::{Tag, Title};
 pub use utility::{
     api::url::Website,
     error::{HentaiError, Result},
@@ -208,7 +208,7 @@ impl Hentai {
     ///     let mut path = env::current_exe()?;
     ///     path.pop();
     ///     path.push("sample.json");
-    /// 
+    ///
     ///     let response = Hentai::from_json(path, Website::XXX)?;
     ///     println!("{:?}", result);
     ///     Ok(())
