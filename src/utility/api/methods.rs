@@ -9,5 +9,8 @@ pub fn search_tag(tag_id: u32, page: u32) -> String {
 
 #[allow(dead_code)]
 pub fn search_similar(doujin_id: u32) -> String {
-    format!("https://nhentai.net/api/gallery/{}/related", doujin_id.to_string())
+    format!(
+        "https://nhentai.net/api/gallery/{}/related",
+        doujin_id.to_string()
+    )
 }
