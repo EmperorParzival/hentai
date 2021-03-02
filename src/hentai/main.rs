@@ -47,7 +47,7 @@ async fn main() -> Result<()> {
     // let response = Hentai::new(165961, Website::NET).await?;
     // println!("{:?}", response); // makes use of the Debug trait on Hentai
 
-    let response = Hentai::random(Website::XXX).await?;
+    let response = Hentai::random(Website::NET).await?;
     println!("{:?}", response);
 
     Ok(())
