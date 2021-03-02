@@ -1,7 +1,4 @@
-use crate::utility::{
-    api::url::{self, Website},
-    error::Result,
-};
+use crate::utility::{api::url, error::Result};
 use chrono::{serde::ts_seconds, DateTime, Utc};
 use hyper::{
     body::{self, Buf},
@@ -80,12 +77,12 @@ impl Doujin {
         Ok(result)
     }
 
-    pub async fn random(mode: &Website) -> Result<u32> {
+    pub async fn random() -> Result<u32> {
         let https = HttpsConnector::new();
         let client = Client::builder().build::<_, hyper::Body>(https);
 
         let response = client
-            .get(hyper::Uri::from_str(&url::random(mode))?)
+            .get(hyper::Uri::from_str("https://nhentai.xxx/random")?)
             .await
             .expect("Failed to request url");
         let segments = response
@@ -99,8 +96,7 @@ impl Doujin {
             .iter()
             .next_back()
             .ok_or("Failed to parse url")?
-            .parse::<u32>()
-            .unwrap();
+            .parse::<u32>()?;
 
         Ok(code)
     }

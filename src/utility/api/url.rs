@@ -123,13 +123,3 @@ impl Make {
 pub fn doujin(id: u32) -> String {
     format!("https://{}/api/gallery/{}", NET, id.to_string())
 }
-
-pub fn random(mode: &Website) -> String {
-    format!(
-        "https://{}/random",
-        match mode {
-            Website::NET => NET,
-            Website::XXX => XXX,
-        }
-    )
-}

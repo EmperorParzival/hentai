@@ -26,18 +26,26 @@
 //! ```
 //!
 //! ```rust
+//! use hentai::{Hentai, Result, Website}
+//! 
+//! #[tokio::main]
+//! async fn main() -> Result<()> {
+//!     let response = Hentai::random(Website::XXX).await?;
+//!     println!("{:?}", response);
+//!
+//!     Ok(())
+//! }
+//! ```
+//! 
+//! ```rust
 //! use hentai::{Hentai, Result, Website};
 //! use std::env;
 //!
 //! fn main() -> Result<()> {
-//!     let mut path = env::current_exe()?; // std::path::PathBuf
-//!     path.pop();
-//!     path.push("sample.json");
-//!
-//!     if let Ok(result) = Hentai::from_json(path, Website::XXX) {
-//!         println!("{:?}", result); // makes use of the Debug trait on Hentai
-//!     }
-//!
+//!     let path = env::current_dir()?;
+//!     let response = Hentai::from_json(path, Website::XXX)?;
+//! 
+//!     println!("{:?}", result);
 //!     Ok(())
 //! }
 //! ```
@@ -150,8 +158,30 @@ impl Hentai {
         Ok(organize_fields(result, Make::new(mode)))
     }
 
+    /// Generates a `Hentai` object for a randomly selected doujin from nhentai's
+    /// [random](https://nhentai.xxx/random) endpoint.
+    /// 
+    /// A six-digit code is taken from the response headers from this request. If the code cannot be
+    /// retrieved from the header, the following errors can be raised:
+    /// - `BaseError`,
+    /// - [ToStrError](https://docs.rs/hyper/0.14.4/hyper/header/struct.ToStrError.html),
+    /// - [ConversionError](https://doc.rust-lang.org/std/num/struct.ParseIntError.html),
+    /// depending on the format of the response.
+    /// 
+    /// The sample below depends on [tokio](https://tokio.rs/).
+    /// ```rust
+    /// use hentai::{Hentai, Result, Website}
+    /// 
+    /// #[tokio::main]
+    /// async fn main() -> Result<()> {
+    ///     let response = Hentai::random(Website::XXX).await?;
+    ///     println!("{:?}", response);
+    ///
+    ///     Ok(())
+    /// }
+    /// ```
     pub async fn random(mode: Website) -> Result<Self> {
-        let code = Doujin::random(&mode).await?;
+        let code = Doujin::random().await?;
         let result = Doujin::new(code).await?;
 
         Ok(organize_fields(result, Make::new(mode)))
@@ -172,14 +202,10 @@ impl Hentai {
     /// use std::env;
     ///
     /// fn main() -> Result<()> {
-    ///     let mut path = env::current_exe()?; // std::path::PathBuf
-    ///     path.pop();
-    ///     path.push("sample.json");
+    ///     let path = env::current_dir()?;
+    ///     let response = Hentai::from_json(path, Website::XXX)?;
     ///
-    ///     if let Ok(result) = Hentai::from_json(path, Website::XXX) {
-    ///         println!("{:?}", result); // makes use of the Debug trait on Hentai
-    ///     }
-    ///
+    ///     println!("{:?}", result);
     ///     Ok(())
     /// }
     /// ```

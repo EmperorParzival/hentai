@@ -1,5 +1,5 @@
 use hyper::{header, http::uri};
-use std::{fmt, io, result};
+use std::{fmt, io, num, result};
 
 /// Global error type for Hentai that catches all other types of errors that may occur.
 /// This still provides the original error message when printed.
@@ -19,6 +19,11 @@ use std::{fmt, io, result};
 ///
 /// `ToStrError` happens when using `Hentai::random()` and the redirect header cannot be converted
 /// into a random doujin URL.
+///
+/// `ConversionError` happens when the response from nhentai's [/random](https://nhentai.net/random)
+/// endpoint returns a URL from which the six-digit code could not be converted into an integer.
+/// The cause of this is currently unknown, but please crate an issue on GitHub if you know how to
+/// fix this.
 #[derive(Debug)]
 pub enum HentaiError {
     IoError(io::Error),
@@ -27,6 +32,7 @@ pub enum HentaiError {
     UriError(uri::InvalidUri),
     SerdeError(serde_json::Error),
     ToStrError(header::ToStrError),
+    ConversionError(num::ParseIntError),
 }
 
 impl fmt::Display for HentaiError {
@@ -68,6 +74,12 @@ impl From<serde_json::Error> for HentaiError {
 impl From<header::ToStrError> for HentaiError {
     fn from(err: header::ToStrError) -> Self {
         HentaiError::ToStrError(err)
+    }
+}
+
+impl From<num::ParseIntError> for HentaiError {
+    fn from(err: num::ParseIntError) -> Self {
+        HentaiError::ConversionError(err)
     }
 }
 
