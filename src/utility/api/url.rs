@@ -121,5 +121,5 @@ impl Make {
 }
 
 pub fn doujin(id: u32) -> String {
-    format!("https://{}/api/gallery/{}", NET, id.to_string())
+    format!("https://nhentai.net/api/gallery/{}", id.to_string())
 }
