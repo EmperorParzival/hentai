@@ -20,7 +20,7 @@ use std::{fmt, io, num, result};
 /// `ToStrError` happens when using `Hentai::random()` and the redirect header cannot be converted
 /// into a random doujin URL.
 ///
-/// `ConversionError` happens when the response from nhentai's [/random](https://nhentai.net/random)
+/// `ConversionError` happens when the response from nhentai's [/random](https://nhentai.xxx/random)
 /// endpoint returns a URL from which the six-digit code could not be converted into an integer.
 /// The cause of this is currently unknown, but please crate an issue on GitHub if you know how to
 /// fix this.
