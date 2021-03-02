@@ -1,7 +1,4 @@
-use crate::utility::{
-    api::url::{self, Website},
-    error::Result,
-};
+use crate::utility::{api::url, error::Result};
 use chrono::{serde::ts_seconds, DateTime, Utc};
 use hyper::{
     body::{self, Buf},
