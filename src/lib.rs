@@ -27,7 +27,7 @@
 //!
 //! ```rust
 //! use hentai::{Hentai, Result, Website}
-//! 
+//!
 //! #[tokio::main]
 //! async fn main() -> Result<()> {
 //!     let response = Hentai::random(Website::XXX).await?;
@@ -36,7 +36,7 @@
 //!     Ok(())
 //! }
 //! ```
-//! 
+//!
 //! ```rust
 //! use hentai::{Hentai, Result, Website};
 //! use std::env;
@@ -44,7 +44,7 @@
 //! fn main() -> Result<()> {
 //!     let path = env::current_dir()?;
 //!     let response = Hentai::from_json(path, Website::XXX)?;
-//! 
+//!
 //!     println!("{:?}", result);
 //!     Ok(())
 //! }
@@ -160,18 +160,18 @@ impl Hentai {
 
     /// Generates a `Hentai` object for a randomly selected doujin from nhentai's
     /// [random](https://nhentai.xxx/random) endpoint.
-    /// 
+    ///
     /// A six-digit code is taken from the response headers from this request. If the code cannot be
     /// retrieved from the header, the following errors can be raised:
     /// - `BaseError`,
     /// - [ToStrError](https://docs.rs/hyper/0.14.4/hyper/header/struct.ToStrError.html),
     /// - [ConversionError](https://doc.rust-lang.org/std/num/struct.ParseIntError.html),
     /// depending on the format of the response.
-    /// 
+    ///
     /// The sample below depends on [tokio](https://tokio.rs/).
     /// ```rust
     /// use hentai::{Hentai, Result, Website}
-    /// 
+    ///
     /// #[tokio::main]
     /// async fn main() -> Result<()> {
     ///     let response = Hentai::random(Website::XXX).await?;
