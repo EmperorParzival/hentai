@@ -1,10 +1,14 @@
-use crate::{doujin::Doujin, utility::api::methods};
-use serde::Deserialize;
+use crate::{
+    doujin::Doujin,
+    utility::{api::methods, error::Result},
+};
 use hyper::{
     body::{self, Buf},
     Client,
 };
 use hyper_tls::HttpsConnector;
+use serde::Deserialize;
+use std::str::FromStr;
 
 #[derive(Deserialize)]
 pub struct Search {
@@ -14,17 +18,13 @@ pub struct Search {
 }
 
 impl Search {
-    pub fn new(id: u32, page: Option<u32>) -> Result<Self> {
-        let page_num = match page {
-            Some(num) => num,
-            None => 1,
-        };
-
+    pub async fn new(id: u32, page: Option<u32>) -> Result<Self> {
         let https = HttpsConnector::new();
         let client = Client::builder().build::<_, hyper::Body>(https);
+        let url = methods::search_tag(id, page.unwrap_or(1));
 
         let response = client
-            .get(hyper::Uri::from_str(methods::search_tag(id, page_num))
+            .get(hyper::Uri::from_str(&url)?)
             .await
             .expect("Failed to request url");
         let content = body::aggregate(response)

@@ -54,6 +54,7 @@
 //! ```
 
 mod doujin;
+mod search;
 pub(crate) mod utility;
 
 use chrono::{DateTime, Utc};
@@ -62,6 +63,7 @@ use std::{convert::TryInto, path::PathBuf};
 use utility::api::url::Make;
 
 pub use doujin::{Tag, Title};
+pub use search::Search;
 pub use utility::{
     api::url::Website,
     error::{HentaiError, Result},
