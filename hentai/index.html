@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `hentai` crate."><meta name="keywords" content="rust, rustlang, rust-lang, hentai"><title>hentai - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings"></script><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../hentai/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><p class="location">Crate hentai</p><div class="block version"><p>Version 0.2.2</p></div><div class="sidebar-elems"><a id="all-types" href="all.html"><p>See all hentai's items</p></a><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class="location"></p><div id="sidebar-vars" data-name="hentai" data-ty="mod" data-relpath="../"></div></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
+                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Crate <a class="mod" href="">hentai</a></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/hentai/lib.rs.html#1-230" title="goto source code">[src]</a></span></h1><div class="docblock"><h1 id="hentai" class="section-header"><a href="#hentai">hentai</a></h1>
+<p>The aptly named <em>hentai</em> crate provides an easy mechanism to consume nhentai's public facing
+APIs in Rust. As of now, hentai relies solely on these APIs instead of scraping their website.
+However, this capability may be added in the near future.</p>
+<p>hentai will provide information about a doujin given its six-digit code. Alternatively, the
+JSON response from nhentai's <a href="https://nhentai.net/api/gallery/165961">/api/gallery/{id}</a>
+endpoint may be provided directly.</p>
+<p>hentai is based on the similar <a href="https://pypi.org/project/hentai/">package for python</a>.</p>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<p><em>more info for these samples is provided in the documentation for <code>Hentai</code></em></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">hentai</span>::{<span class="ident">Hentai</span>, <span class="prelude-ty">Result</span>, <span class="ident">Website</span>};
+
+<span class="attribute">#[<span class="ident">tokio</span>::<span class="ident">main</span>]</span>
+<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">main</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">response</span> <span class="op">=</span> <span class="ident">Hentai</span>::<span class="ident">new</span>(<span class="number">165961</span>, <span class="ident">Website</span>::<span class="ident">NET</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">response</span>); <span class="comment">// makes use of the Debug trait on Hentai</span>
+
+    <span class="prelude-val">Ok</span>(())
+}</pre></div>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">hentai</span>::{<span class="ident">Hentai</span>, <span class="prelude-ty">Result</span>, <span class="ident">Website</span>};
+
+<span class="attribute">#[<span class="ident">tokio</span>::<span class="ident">main</span>]</span>
+<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">main</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">response</span> <span class="op">=</span> <span class="ident">Hentai</span>::<span class="ident">random</span>(<span class="ident">Website</span>::<span class="ident">XXX</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">response</span>);
+
+    <span class="prelude-val">Ok</span>(())
+}</pre></div>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">hentai</span>::{<span class="ident">Hentai</span>, <span class="prelude-ty">Result</span>, <span class="ident">Website</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
+
+<span class="kw">fn</span> <span class="ident">main</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">env</span>::<span class="ident">current_exe</span>()<span class="question-mark">?</span>;
+    <span class="ident">path</span>.<span class="ident">pop</span>();
+    <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;sample.json&quot;</span>);
+
+    <span class="kw">let</span> <span class="ident">response</span> <span class="op">=</span> <span class="ident">Hentai</span>::<span class="ident">from_json</span>(<span class="ident">path</span>, <span class="ident">Website</span>::<span class="ident">XXX</span>)<span class="question-mark">?</span>;
+    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">response</span>);
+
+    <span class="prelude-val">Ok</span>(())
+}</pre></div>
+</div><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
+<table><tr class="module-item"><td><a class="struct" href="struct.Hentai.html" title="hentai::Hentai struct">Hentai</a></td><td class="docblock-short"><p>The main object containing the formatted information retrieved from nhentai. The raw image
+data is converted to into image URLs. A brief explanation of each field is located below.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Search.html" title="hentai::Search struct">Search</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="struct" href="struct.Tag.html" title="hentai::Tag struct">Tag</a></td><td class="docblock-short"><p>Tags are used to categorize doujins. Each doujin published on nhentai has tags indicating its
+content and additional data like the language and artist. For example, the tag with the
+category field equal to &quot;artist&quot; contains the name by which the author is recognized on nhentai.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Title.html" title="hentai::Title struct">Title</a></td><td class="docblock-short"><p>nhentai provides three different types of titles. The first one is <code>pretty</code>, which is a
+simple title meant to stand out. The <code>english</code> and <code>japanese</code> titles are also provided.
+These are more fleshed out versions of the <code>pretty</code> title.</p>
+</td></tr></table><h2 id="enums" class="section-header"><a href="#enums">Enums</a></h2>
+<table><tr class="module-item"><td><a class="enum" href="enum.HentaiError.html" title="hentai::HentaiError enum">HentaiError</a></td><td class="docblock-short"><p>Global error type for Hentai that catches all other types of errors that may occur.
+This still provides the original error message when printed.</p>
+</td></tr><tr class="module-item"><td><a class="enum" href="enum.Website.html" title="hentai::Website enum">Website</a></td><td class="docblock-short"><p>In cases where the standard output domain <a href="https://nhentai.net">nhentai.net</a> may be restricted
+on the end user's network, an option can be provided to use <a href="https://nhentai.xxx">nhentai.xxx</a>
+URLs instead. Note that the <code>Hentai::new()</code> constructor will not work if the standard output
+domain is blocked. This is because <a href="https://nhentai.xxx">nhentai.xxx</a> does not reimplement
+nhentai's API and requests must still be made to the original URL.</p>
+</td></tr></table><h2 id="types" class="section-header"><a href="#types">Type Definitions</a></h2>
+<table><tr class="module-item"><td><a class="type" href="type.Result.html" title="hentai::Result type">Result</a></td><td class="docblock-short"><p>Shorthand for Result&lt;T, HentaiError&gt; meant to make catching errors slightly more simple.</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="hentai"></div>
+    <script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>
