@@ -39,10 +39,10 @@ impl Make {
         Make { mode }
     }
 
-    pub fn doujin_url(&self, id: u32) -> String {
+    pub fn doujin_url(&self, id: &str) -> String {
         match self.mode {
-            Website::NET => format!("https://{}/g/{}", NET, id.to_string()),
-            Website::XXX => format!("https://{}/g/{}", XXX, id.to_string()),
+            Website::NET => format!("https://{}/g/{}", NET, id),
+            Website::XXX => format!("https://{}/g/{}", XXX, id),
         }
     }
 

@@ -51,7 +51,7 @@ pub struct Tag {
 
 #[derive(Deserialize)]
 pub struct Doujin {
-    pub id: u32,
+    pub id: String,
     pub title: Title,
     pub images: Images,
     pub tags: Vec<Tag>,

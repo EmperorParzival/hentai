@@ -122,7 +122,7 @@ fn organize_fields(raw: Doujin, builder: Make) -> Hentai {
         upload_date: raw.upload_date,
         num_favorites: raw.num_favorites,
 
-        url: builder.doujin_url(raw.id),
+        url: builder.doujin_url(&raw.id),
         cover_url: builder.cover(media_id, &raw.images.cover.t),
         thumbnail_url: builder.cover_thumbnail(media_id, &raw.images.thumbnail.t),
     }
@@ -213,7 +213,7 @@ impl Hentai {
     ///
     ///     let response = Hentai::from_json(path, Website::XXX)?;
     ///     println!("{:?}", response);
-    /// 
+    ///
     ///     Ok(())
     /// }
     /// ```
