@@ -9,18 +9,24 @@
     <img alt="downloads" src="https://img.shields.io/crates/d/hentai"></img>
   </a>
   <br />
-  <a href="https://repl.it/github/EmperorParzival/hentai">
-    <img alt="Run on Repl.it" src="https://repl.it/badge/github/EmperorParzival/hentai"></img>
-  </a>
-  <a href="https://gitpod.io/#https://github.com/EmperorParzival/hentai">
-    <img alt="Gitpod ready-to-code" src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod"></img>
-  </a>
-  <br />
   <a href="https://github.com/EmperorParzival/hentai/blob/main/LICENSE">
     <img alt="license" src="https://img.shields.io/crates/l/hentai"></img>
   </a>
   <a href="https://github.com/EmperorParzival/hentai">
     <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/EmperorParzival/hentai"></img>
+  </a>
+  <a href="https://travis-ci.com/EmperorParzival/hentai">
+    <img alt="Build Status" src="https://travis-ci.com/EmperorParzival/hentai.svg?branch=main"></img>
+  </a>
+  <a href="https://emperorparzival.github.io/hentai/hentai/index.html">
+    <img alt="GitHub deployments" src="https://img.shields.io/github/deployments/EmperorParzival/hentai/github-pages">
+  </a>
+  <br />
+  <a href="https://repl.it/github/EmperorParzival/hentai">
+    <img alt="Run on Repl.it" src="https://repl.it/badge/github/EmperorParzival/hentai"></img>
+  </a>
+  <a href="https://gitpod.io/#https://github.com/EmperorParzival/hentai">
+    <img alt="Gitpod ready-to-code" src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod"></img>
   </a>
 </p>
 
@@ -36,34 +42,38 @@ provided directly.
 
 hentai is based on the similar [package for python](https://pypi.org/project/hentai/).
 
-## Install
-
-### Using [cargo-edit](https://crates.io/crates/cargo-edit)
-```shell
-cargo add hentai
-```
-
-### Manually
-Add the following to your `Cargo.toml`:
-```toml
-hentai = "0.2.2"
-```
+## Documentation
+- https://emperorparzival.github.io/hentai/hentai/index.html
+- https://docs.rs/hentai
 
 ## Planned Features
 - [ ] Search doujins and other misc. features
 - [ ] CLI [in progress]
 - [ ] Web scraping to get new & popular doujins
 
+## Install
+
+#### Using [cargo-edit](https://crates.io/crates/cargo-edit)
+```shell
+cargo add hentai
+```
+
+#### Manually
+Add the following to your `Cargo.toml`:
+```toml
+hentai = "0.2.2"
+```
+
 ## Contribute
 
-### Local
+#### Local
 ```shell
 git clone https://github.com/EmperorParzival/hentai
 cd hentai
 cargo install --force --path .
 ```
 
-### Browser
+#### Browser
 - [Run on Repl.it](https://repl.it/github/EmperorParzival/hentai)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/EmperorParzival/hentai)
