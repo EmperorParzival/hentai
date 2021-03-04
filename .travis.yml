@@ -4,10 +4,13 @@ rust:
   - beta
   - nightly
 
+script:
+  - cargo build --verbose --features=cli
+  - cargo test --verbose --features=cli
+
 cache: cargo
 
 jobs:
   allow_failures:
     - rust: nightly
   fast_finish: true
-  
