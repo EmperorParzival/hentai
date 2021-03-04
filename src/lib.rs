@@ -26,7 +26,7 @@
 //! ```
 //!
 //! ```rust
-//! use hentai::{Hentai, Result, Website}
+//! use hentai::{Hentai, Result, Website};
 //!
 //! #[tokio::main]
 //! async fn main() -> Result<()> {
@@ -37,7 +37,7 @@
 //! }
 //! ```
 //!
-//! ```rust
+//! ```no_run
 //! use hentai::{Hentai, Result, Website};
 //! use std::env;
 //!
@@ -47,7 +47,7 @@
 //!     path.push("sample.json");
 //!
 //!     let response = Hentai::from_json(path, Website::XXX)?;
-//!     println!("{:?}", result);
+//!     println!("{:?}", response);
 //!
 //!     Ok(())
 //! }
@@ -175,7 +175,7 @@ impl Hentai {
     ///
     /// The sample below depends on [tokio](https://tokio.rs/).
     /// ```rust
-    /// use hentai::{Hentai, Result, Website}
+    /// use hentai::{Hentai, Result, Website};
     ///
     /// #[tokio::main]
     /// async fn main() -> Result<()> {
@@ -202,7 +202,7 @@ impl Hentai {
     /// The sample below assumes that you have a valid doujin JSON file called
     /// [sample.json](https://github.com/EmperorParzival/hentai/blob/main/src/cli/sample.json) in
     /// the same directory as the executable.
-    /// ```rust
+    /// ```no_run
     /// use hentai::{Hentai, Result, Website};
     /// use std::env;
     ///
@@ -212,7 +212,8 @@ impl Hentai {
     ///     path.push("sample.json");
     ///
     ///     let response = Hentai::from_json(path, Website::XXX)?;
-    ///     println!("{:?}", result);
+    ///     println!("{:?}", response);
+    /// 
     ///     Ok(())
     /// }
     /// ```
