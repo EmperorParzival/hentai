@@ -6,6 +6,7 @@ use hyper::{
 };
 use hyper_tls::HttpsConnector;
 use serde::Deserialize;
+use serde_json::Value;
 use std::{fs, path::PathBuf, str::FromStr};
 
 /// nhentai provides three different types of titles. The first one is `pretty`, which is a
@@ -51,7 +52,7 @@ pub struct Tag {
 
 #[derive(Deserialize)]
 pub struct Doujin {
-    pub id: String,
+    pub id: Value,
     pub title: Title,
     pub images: Images,
     pub tags: Vec<Tag>,
@@ -75,8 +76,7 @@ impl Doujin {
         let content = body::aggregate(response)
             .await
             .expect("Failed to aggregate body");
-        let result: Self =
-            serde_json::from_reader(content.reader()).expect("Failed to deserialize json");
+        let result: Self = serde_json::from_reader(content.reader())?;
 
         Ok(result)
     }

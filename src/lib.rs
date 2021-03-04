@@ -72,6 +72,8 @@ pub use utility::{
 /// The main object containing the formatted information retrieved from nhentai. The raw image
 /// data is converted to into image URLs. A brief explanation of each field is located below.
 ///
+/// - `id` is the six-digit code of the doujin. This is redundant if you are using the
+/// `Hentai::new()` constructor.
 /// - `url` is the direct link to the doujin created from the provided six-digit code.
 /// - `scanlator` is the user that created translations for the doujin (not always present).
 /// - Fields suffixed with "url" or "urls" are links to the doujin's image files.
@@ -86,6 +88,7 @@ pub use utility::{
 /// indicates when the doujin was uploaded to nhentai. This is not the creation date of the doujin.
 #[derive(Debug)]
 pub struct Hentai {
+    pub id: u32,
     pub url: String,
     pub title: Title,
     pub tags: Vec<Tag>,
@@ -110,10 +113,12 @@ fn create_urls(raw: &Doujin, builder: &Make) -> Vec<String> {
 
 fn organize_fields(raw: Doujin, builder: Make) -> Hentai {
     let media_id = &raw.media_id;
+    let id = &raw.id.to_string();
 
     Hentai {
         image_urls: create_urls(&raw, &builder),
         media_id: media_id.to_string(),
+        id: id.parse().unwrap_or(0),
 
         tags: raw.tags,
         title: raw.title,
@@ -122,7 +127,7 @@ fn organize_fields(raw: Doujin, builder: Make) -> Hentai {
         upload_date: raw.upload_date,
         num_favorites: raw.num_favorites,
 
-        url: builder.doujin_url(&raw.id),
+        url: builder.doujin_url(id),
         cover_url: builder.cover(media_id, &raw.images.cover.t),
         thumbnail_url: builder.cover_thumbnail(media_id, &raw.images.thumbnail.t),
     }

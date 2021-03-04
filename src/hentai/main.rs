@@ -21,5 +21,12 @@ async fn main() -> Result<()> {
     let response = Hentai::random(Website::XXX).await?;
     println!("{:?}", response);
 
+    // let mut path = std::env::current_exe()?;
+    // path.pop();
+    // path.push("sample.json");
+
+    // let response = Hentai::from_json(path, Website::XXX)?;
+    // println!("{:?}", response);
+
     Ok(())
 }
