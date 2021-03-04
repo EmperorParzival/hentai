@@ -42,7 +42,7 @@
 //! use std::env;
 //!
 //! fn main() -> Result<()> {
-//!     let mut path = env::current_dir()?;
+//!     let mut path = env::current_exe()?;
 //!     path.pop();
 //!     path.push("sample.json");
 //!
